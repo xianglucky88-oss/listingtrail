@@ -1,1 +1,1 @@
-"""listingtrail baseline (single-responsibility pipeline)."""
+"""listingtrail package (single-responsibility pipeline)."""
