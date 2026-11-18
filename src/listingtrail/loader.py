@@ -2,6 +2,9 @@
 import json
 from .config import FIXTURES
 
-def load():
-    with open(FIXTURES, encoding="utf-8") as f:
+
+def load(path=None):
+    """Load raw records from *path* (default: the configured fixture)."""
+    target = FIXTURES if path is None else path
+    with open(target, encoding="utf-8") as f:
         return json.load(f)

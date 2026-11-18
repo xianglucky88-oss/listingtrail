@@ -1,0 +1,115 @@
+[
+  {
+    "id": "page-001",
+    "url": "https://alpha.example/listings?page=1",
+    "src": "alpha",
+    "name": "动态首屏 + 异步成功",
+    "page_attempts": [
+      [
+        {
+          "kind": "first_screen",
+          "html": "<html><body><div id='root'>加载中…</div></body></html>"
+        },
+        {
+          "kind": "async",
+          "wait_ms": 300,
+          "data": {
+            "listings": [
+              {"id": "alpha-1001", "title": "两居 望京", "price": 5200000},
+              {"id": "alpha-1002", "title": "三居 望京", "price": 7300000}
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "id": "page-002",
+    "url": "https://alpha.example/listings?page=2",
+    "src": "alpha",
+    "name": "首屏局部成功 + 异步超时",
+    "fetch_policy": {"timeout_ms": 500, "on_partial": "keep"},
+    "page_attempts": [
+      [
+        {
+          "kind": "first_screen",
+          "listings": [
+            {"id": "alpha-2001", "title": "一居 首屏可见", "price": 3100000}
+          ]
+        },
+        {
+          "kind": "async",
+          "wait_ms": 900,
+          "data": {
+            "listings": [
+              {"id": "alpha-2002", "title": "异步内容未及时返回", "price": 4100000}
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "id": "page-003",
+    "url": "https://alpha.example/listings?page=3",
+    "src": "alpha",
+    "name": "验证码拦截页",
+    "page_attempts": [
+      [
+        {
+          "kind": "captcha",
+          "status": 200,
+          "html": "<html><body>请完成验证码后继续访问</body></html>"
+        }
+      ]
+    ]
+  },
+  {
+    "id": "page-004",
+    "url": "https://alpha.example/listings?page=4",
+    "src": "alpha",
+    "name": "空壳页面",
+    "page_attempts": [
+      [
+        {
+          "kind": "empty_shell",
+          "status": 200,
+          "html": "<html><body><div id='root'></div><script src='app.js'></script></body></html>"
+        }
+      ]
+    ]
+  },
+  {
+    "id": "page-005",
+    "url": "https://beta.example/houses",
+    "src": "beta",
+    "name": "空壳 → 异步列表",
+    "page_attempts": [
+      [
+        {"kind": "empty_shell", "status": 200, "html": "<div id='root'>加载中</div>"},
+        {
+          "kind": "async",
+          "wait_ms": 120,
+          "data": {
+            "items": [
+              {"listing_id": "beta-3001", "title": "海景一居", "price": 2800000},
+              {"listing_id": "beta-3002", "title": "海景两居", "price": 4600000},
+              {"listing_id": "beta-3002", "title": "海景两居（重复渲染）", "price": 4600000}
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "id": "page-006",
+    "url": "https://beta.example/houses?page=2",
+    "src": "beta",
+    "name": "服务端错误页",
+    "page_attempts": [
+      [
+        {"kind": "error", "status": 500, "html": "<html><body>服务不可用</body></html>"}
+      ]
+    ]
+  }
+]
