@@ -37,3 +37,6 @@ tokens.*
 *connection_string*
 *connstr*
 .DS_Store
+
+# 本地来源策略覆盖（示例见 fetch_policy.example.json）
+fetch_policy.json

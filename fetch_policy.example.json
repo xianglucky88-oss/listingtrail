@@ -1,0 +1,53 @@
+{
+  "alpha": {
+    "request_mode": "plain",
+    "conditional_requests": true,
+    "render_on_block": true,
+    "render_hold_records": 5,
+    "treat_404_as_delisted": true,
+    "retry": {
+      "max_attempts": 3,
+      "backoff_seconds": 2.0,
+      "retry_categories": ["timeout", "network", "server_error", "rate_limited"]
+    },
+    "rate_limit": {
+      "min_interval_seconds": 2.0,
+      "max_wait_seconds": 10.0
+    },
+    "circuit_breaker": {
+      "failure_threshold": 2,
+      "cooldown_seconds": 30.0,
+      "allow_probe": true,
+      "probe_after_seconds": 30.0
+    }
+  },
+  "beta": {
+    "request_mode": "plain",
+    "conditional_requests": true,
+    "render_on_block": false,
+    "treat_404_as_delisted": true,
+    "rate_limit": {
+      "min_interval_seconds": 0.0,
+      "max_wait_seconds": 30.0
+    },
+    "circuit_breaker": {
+      "failure_threshold": 3,
+      "cooldown_seconds": 60.0,
+      "allow_probe": true,
+      "probe_after_seconds": 60.0
+    }
+  },
+  "gamma": {
+    "request_mode": "render",
+    "conditional_requests": false,
+    "rate_limit": {
+      "min_interval_seconds": 5.0,
+      "max_wait_seconds": 60.0
+    },
+    "circuit_breaker": {
+      "failure_threshold": 4,
+      "cooldown_seconds": 120.0,
+      "allow_probe": false
+    }
+  }
+}

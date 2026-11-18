@@ -1,6 +1,8 @@
 PY=python3
 run:
 	PYTHONPATH=src $(PY) -m listingtrail.cli
+demo:
+	PYTHONPATH=src $(PY) -m listingtrail.demo
 test:
 	PYTHONPATH=src $(PY) -m pytest -q
 clean:
